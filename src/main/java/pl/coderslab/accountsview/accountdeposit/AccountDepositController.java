@@ -22,7 +22,7 @@ public class AccountDepositController {
         return ResponseEntity.ok(accountDepositDto1);
     }
     @GetMapping
-    public List<AccountDepositDto> getAllPersons() {
+    public List<AccountDepositDto> getAllCards() {
         List<AccountDepositDto> accountDepositDtos = accountDepositService.getAll();
         return accountDepositDtos;
     }
