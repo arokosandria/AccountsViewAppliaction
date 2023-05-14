@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.coderslab.accountsview.accountdeposit.AccountDeposit;
+import pl.coderslab.accountsview.accountdeposit.AccountDepositRepository;
 import pl.coderslab.accountsview.carddeposit.CardDeposit;
 
 import javax.persistence.EntityManager;
@@ -26,26 +28,8 @@ import java.util.concurrent.TimeUnit;
 public class CurrencyServiceImpl implements CurrencyService {
     private final CurrencyRepository currencyRepository;
     private final ApiNbpClient apiNbpClient;
+    private final AccountDepositRepository accountDepositRepository;
 
-    @Override
-    @Transactional
-    public CurrencyDto create(CurrencyDto currencyDto) {
-        Currency currency =
-                Currency.builder()
-                        .currency(currencyDto.currency)
-                        .mid(apiNbpClient.getRate(currencyDto.currency).rateDto().get(0).mid())
-                        .build();
-
-        currencyRepository.save(currency);
-
-        return toDto(currency);
-    }
-
-    CurrencyDto toDto(Currency currency) {
-
-        return new CurrencyDto(apiNbpClient.getRate(currency.getCurrency()).rateDto().get(0).mid(),
-                currency.getCurrency());
-    }
     @Scheduled(cron = "*/30 * * * * ?")
     public void every30SecondsReadCurrency() {
         currencyRepository.deleteCurrencies();
@@ -61,4 +45,21 @@ public class CurrencyServiceImpl implements CurrencyService {
         log.info("Currency write done");
 
     }
+
+@Override
+    public CurrencyResponse getByNumberAccount(String numberAccount, String currency) {
+        AccountDeposit accountDeposit=accountDepositRepository.findByNumberAccount(numberAccount);
+        Currency currency1=currencyRepository.getMidByCurrency(currency);
+        CurrencyResponse currencyResponse =
+                CurrencyResponse.builder()
+                        .numberAccount(accountDeposit.getNumberAccount())
+                        .currency(currency)
+                        .amount(accountDeposit.getBalance())
+                        .amountCurrency(accountDeposit.getBalance()/currency1.getMid())
+                        .build();
+        return currencyResponse;
+    }
+
+
 }
+

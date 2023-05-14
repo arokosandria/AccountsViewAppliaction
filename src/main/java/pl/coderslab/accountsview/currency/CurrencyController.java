@@ -3,13 +3,11 @@ package pl.coderslab.accountsview.currency;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.accountsview.carddeposit.CardDepositDto;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/currency")
@@ -20,8 +18,11 @@ public class CurrencyController {
     private final CurrencyService currencyService;
 
 
-    @PostMapping
-    public ResponseEntity<CurrencyDto> create(@RequestBody @Valid CurrencyDto currencyDto) {
-        return ResponseEntity.ok(currencyService.create(currencyDto));
+
+    @GetMapping("/{numberCard}/{currency}")
+    public CurrencyResponse getNumberCardCurrenv(@PathVariable String numberCard,@PathVariable String currency) {
+        CurrencyResponse currencyResponse=currencyService.getByNumberAccount(numberCard,currency);
+        return currencyResponse;
+
     }
 }
