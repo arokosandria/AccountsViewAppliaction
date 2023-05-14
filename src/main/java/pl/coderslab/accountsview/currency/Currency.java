@@ -18,6 +18,6 @@ public class Currency {
     private Long id;
     String currency;
     Double mid;
-    String name;
+
 
 }

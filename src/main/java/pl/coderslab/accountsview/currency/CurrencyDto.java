@@ -9,7 +9,5 @@ import lombok.*;
 @NoArgsConstructor
 public class CurrencyDto {
     Double mid;
-    String code;
-    String name;
     String currency;
 }
