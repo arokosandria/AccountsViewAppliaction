@@ -3,7 +3,6 @@ package pl.coderslab.accountsview.currency;
 import lombok.*;
 
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor

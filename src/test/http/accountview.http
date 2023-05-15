@@ -2,15 +2,11 @@
 GET http://localhost:8080/api/card
 
 ### Get Nbp
-GET http://localhost:8080/api/nbp/USD
+GET http://localhost:8080/api/nbp/USD/120
 
 ###Utworzenie
-POST http://localhost:8080/api/currency
-Content-Type: application/json
+GET http://localhost:8080/api/currency/22237788822/NOK
 
-{"currency": "USD",
-  "name": "Kasia"
-}
 ###
 PUT http://localhost:8080/api/card/22344334
 Content-Type: application/json

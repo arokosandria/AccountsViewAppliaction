@@ -4,16 +4,18 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
-@Component
+@Service
 @RequiredArgsConstructor
 public class ApiNbpClient {
 
@@ -26,6 +28,12 @@ public class ApiNbpClient {
         String url = apiPath.concat("/a/{currency}");
         NbpDto rate = restTemplate.getForObject(url, NbpDto.class, currency);
         return rate;
+    }
+    @Async
+    public CompletableFuture<NbpDto> getRateOfDay(String currency, int count) {
+        String url = apiPath.concat("/a/{currency}/last/{count}");
+        NbpDto rate = restTemplate.getForObject(url, NbpDto.class, currency, count);
+        return CompletableFuture.completedFuture(rate);
     }
 
 }

@@ -16,11 +16,9 @@ import java.util.Optional;
 
 public class CurrencyController {
     private final CurrencyService currencyService;
-
-
-
+    
     @GetMapping("/{numberCard}/{currency}")
-    public CurrencyResponse getNumberCardCurrenv(@PathVariable String numberCard,@PathVariable String currency) {
+    public CurrencyResponse getNumberCardCurrency(@PathVariable String numberCard,@PathVariable String currency) {
         CurrencyResponse currencyResponse=currencyService.getByNumberAccount(numberCard,currency);
         return currencyResponse;
 
