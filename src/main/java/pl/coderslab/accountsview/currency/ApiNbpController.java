@@ -28,7 +28,6 @@ public class ApiNbpController {
         List<CompletableFuture<Boolean>> results = new ArrayList<>();
         for (int i = 0; i < count-1; i++) {
             int finalI = i;
-            int finalI1 = i;
             CompletableFuture<Boolean> currencyResult = apiNbpClient.getRateOfDay(currency, count).thenApply(NbpDto -> currencies.add(NbpDto.rateDto().get(finalI)));
             results.add(currencyResult);
         }
