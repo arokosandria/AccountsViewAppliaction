@@ -29,7 +29,7 @@ public class Address {
         @NotBlank
         private String postCode;
         @NotBlank
-        private String City;
+        private String city;
 
     }
 

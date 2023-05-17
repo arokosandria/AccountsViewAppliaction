@@ -16,8 +16,8 @@ public class Currency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    String currency;
-    Double mid;
+    private String currency;
+    private double mid;
 
 
 }

@@ -30,6 +30,7 @@ public class Person {
     @Column(nullable = false, unique = true)
     private String name;
     private String email;
+    @Column(nullable = false, unique = true)
     private Date birthday;
     private String firstName;
     private String lastName;
