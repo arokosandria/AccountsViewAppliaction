@@ -34,7 +34,6 @@ public class Person {
     private String firstName;
     private String lastName;
     @Column(nullable = false, unique = true)
-    @PESEL
     private String pesel;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ADDRESS_ID", nullable = false)

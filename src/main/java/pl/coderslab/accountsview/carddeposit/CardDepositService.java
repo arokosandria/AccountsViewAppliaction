@@ -12,4 +12,5 @@ public interface CardDepositService {
     Optional<CardDepositDto> getByNumberCard(String cardNumber);
 
     CardDepositDto update(UpdateCommitRequest request);
+    void delete(Long id);
 }

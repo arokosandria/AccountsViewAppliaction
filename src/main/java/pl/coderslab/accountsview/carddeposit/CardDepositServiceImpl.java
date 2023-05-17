@@ -77,8 +77,8 @@ public class CardDepositServiceImpl implements CardDepositService {
                         cardDeposit -> {
 
                             if (request.name() != null) {
-                              cardDeposit.setName(request.name());
-                                }
+                                cardDeposit.setName(request.name());
+                            }
 
                             return cardDeposit;
                         })
@@ -87,6 +87,10 @@ public class CardDepositServiceImpl implements CardDepositService {
                 .orElseThrow(() -> new IllegalArgumentException("No card with CardNumber " + request.numberCard()));
     }
 
+    @Override
+    public void delete(Long id) {
+        cardDepositRepository.deleteById(id);
+    }
 
 
     private CardDepositDto toDto(CardDeposit cardDeposit) {

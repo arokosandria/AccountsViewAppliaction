@@ -9,30 +9,32 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.IntStream;
 
-@RequestMapping("/api/nbp")
-@RestController
-@RequiredArgsConstructor
-public class ApiNbpController {
 
-    private final ApiNbpClient apiNbpClient;
+    @RequestMapping("/api/nbp")
+    @RestController
+    @RequiredArgsConstructor
+    public class ApiNbpController {
 
-    @GetMapping("/{currency}")
-    public NbpDto getRate(@PathVariable String currency) {
-        return apiNbpClient.getRate(currency);
-    }
+        private final ApiNbpClient apiNbpClient;
 
-    @GetMapping("/{currency}/{count}")
-    public RateDto getRateOfDay(@PathVariable String currency, @PathVariable int count) {
-        List<RateDto> currencies = new CopyOnWriteArrayList<>();
-        List<CompletableFuture<Boolean>> results = new ArrayList<>();
-        for (int i = 0; i < count-1; i++) {
-            int finalI = i;
-            CompletableFuture<Boolean> currencyResult = apiNbpClient.getRateOfDay(currency, count).thenApply(NbpDto -> currencies.add(NbpDto.rateDto().get(finalI)));
-            results.add(currencyResult);
+        @GetMapping("/{currency}")
+        public NbpDto getRate(@PathVariable String currency) {
+            return apiNbpClient.getRate(currency);
         }
-        CompletableFuture.allOf(results.toArray(new CompletableFuture[0])).join();
 
-        return Collections.max(currencies, Comparator.comparing(RateDto::mid));
+        @GetMapping("/{currency}/{count}")
+        public RateDto getRateOfDay(@PathVariable String currency, @PathVariable int count) {
+            List<RateDto> currencies = new CopyOnWriteArrayList<>();
+            List<CompletableFuture<Boolean>> results = new ArrayList<>();
+            for (int i = 0; i < count-1; i++) {
+                int finalI = i;
+                CompletableFuture<Boolean> currencyResult = apiNbpClient.getRateOfDay(currency, count).thenApply(rateDto -> currencies.add(rateDto.rateDto().get(finalI)));
+                results.add(currencyResult);
+            }
+            CompletableFuture.allOf(results.toArray(new CompletableFuture[0])).join();
+
+            return Collections.max(currencies, Comparator.comparing(RateDto::mid));
+        }
     }
-}

@@ -32,7 +32,7 @@ public class CurrencyServiceImpl implements CurrencyService {
 
     @Scheduled(cron = "*/30 * * * * ?")
     public void every30SecondsReadCurrency() {
-        currencyRepository.deleteCurrencies();
+       delete();
         List<String> currencies=List.of("USD","CHF","NOK","RON","SEK");
         for (String currency : currencies) {
             Currency currency1 =
@@ -58,6 +58,11 @@ public class CurrencyServiceImpl implements CurrencyService {
                         .amountCurrency(accountDeposit.getBalance()/currency1.getMid())
                         .build();
         return currencyResponse;
+    }
+
+    @Override
+    public void delete() {
+        currencyRepository.deleteAll();
     }
 
 
