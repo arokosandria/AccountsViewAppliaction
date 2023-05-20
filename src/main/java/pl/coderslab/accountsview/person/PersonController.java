@@ -43,12 +43,16 @@ public class PersonController {
 
     @PutMapping("/{id}")
     public ResponseEntity<PersonDto> update(@PathVariable Long id, @Valid @RequestBody PersonDto personDto) {
-        personDto.setId(id);
-        return ResponseEntity.ok(personService.update(personDto));
+        try {
 
+            personDto.setId(id);
+            return ResponseEntity.ok(personService.update(personDto));
+
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
-
-    @DeleteMapping("/{id}")
+        @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         try {
             personService.delete(id);

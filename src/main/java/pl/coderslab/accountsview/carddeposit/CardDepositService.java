@@ -11,6 +11,9 @@ public interface CardDepositService {
     List<CardDepositDto> getAll();
     Optional<CardDepositDto> getByNumberCard(String cardNumber);
 
-    CardDepositDto update(UpdateCommitRequest request);
+   List<CardDepositDto> getByNumberAccount(String numberAccount);
+
+    CardDepositDto update(UpdateCardDepositRequest request);
     void delete(Long id);
+
 }

@@ -5,10 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.accountsview.accountdeposit.AccountDeposit;
-import pl.coderslab.accountsview.accountdeposit.AccountDepositDto;
 import pl.coderslab.accountsview.accountdeposit.AccountDepositRepository;
 import pl.coderslab.accountsview.person.Person;
-import pl.coderslab.accountsview.person.PersonDto;
 import pl.coderslab.accountsview.person.PersonRepository;
 
 import java.util.List;
@@ -23,6 +21,7 @@ public class CardDepositServiceImpl implements CardDepositService {
     private final PersonRepository personRepository;
     private final CardDepositRepository cardDepositRepository;
     private final AccountDepositRepository accountDepositRepository;
+
 
 
     @Override
@@ -63,6 +62,8 @@ public class CardDepositServiceImpl implements CardDepositService {
                 .collect(Collectors.toList());
     }
 
+
+
     @Override
     public Optional<CardDepositDto> getByNumberCard(String cardNumber) {
         Optional<CardDeposit> cardDeposit = cardDepositRepository.findByNumberCard(cardNumber);
@@ -70,7 +71,13 @@ public class CardDepositServiceImpl implements CardDepositService {
     }
 
     @Override
-    public CardDepositDto update(UpdateCommitRequest request) {
+    public  List<CardDepositDto> getByNumberAccount(String numberAccount) {
+        List<CardDeposit> cardDeposit = cardDepositRepository.getCardDepositsByAccountDeposit_NumberAccount(numberAccount);
+        return cardDeposit.stream().map(this::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public CardDepositDto update(UpdateCardDepositRequest request) {
         return cardDepositRepository
                 .findByNumberCard(request.numberCard())
                 .map(
@@ -91,6 +98,8 @@ public class CardDepositServiceImpl implements CardDepositService {
     public void delete(Long id) {
         cardDepositRepository.deleteById(id);
     }
+
+
 
 
     private CardDepositDto toDto(CardDeposit cardDeposit) {

@@ -27,35 +27,19 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class CurrencyServiceImpl implements CurrencyService {
     private final CurrencyRepository currencyRepository;
-    private final ApiNbpClient apiNbpClient;
     private final AccountDepositRepository accountDepositRepository;
 
-    @Scheduled(cron = "*/30 * * * * ?")
-    public void every30SecondsReadCurrency() {
-       delete();
-        List<String> currencies=List.of("USD","CHF","NOK","RON","SEK");
-        for (String currency : currencies) {
-            Currency currency1 =
-                    Currency.builder()
-                            .currency(currency)
-                            .mid(apiNbpClient.getRate(currency).rateDto().get(0).mid())
-                            .build();
-            currencyRepository.save(currency1);
-        }
-        log.info("Currency write done");
 
-    }
-
-@Override
+    @Override
     public CurrencyResponse getByNumberAccount(String numberAccount, String currency) {
-        AccountDeposit accountDeposit=accountDepositRepository.findByNumberAccount(numberAccount);
-        Currency currency1=currencyRepository.getMidByCurrency(currency);
+        AccountDeposit accountDeposit = accountDepositRepository.findByNumberAccount(numberAccount).orElseThrow(() -> new IllegalArgumentException("No account Number with this numerAccount " + numberAccount));
+        Currency currency1 = currencyRepository.getMidByCurrency(currency);
         CurrencyResponse currencyResponse =
                 CurrencyResponse.builder()
                         .numberAccount(accountDeposit.getNumberAccount())
                         .currency(currency)
                         .amount(accountDeposit.getBalance())
-                        .amountCurrency(accountDeposit.getBalance()/currency1.getMid())
+                        .amountCurrency(accountDeposit.getBalance() / currency1.getMid())
                         .build();
         return currencyResponse;
     }
