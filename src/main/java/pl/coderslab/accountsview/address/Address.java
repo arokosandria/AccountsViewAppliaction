@@ -21,8 +21,8 @@ public class Address {
         @Column(nullable = false)
         private String street;
         @Column(nullable = false)
-        private int number;
-        private int numberFlat;
+        private Integer number;
+        private Integer numberFlat;
         @Column(nullable = false)
         private String postCode;
         @Column(nullable = false)

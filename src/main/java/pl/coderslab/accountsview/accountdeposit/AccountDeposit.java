@@ -5,6 +5,7 @@ import pl.coderslab.accountsview.carddeposit.CardDeposit;
 import pl.coderslab.accountsview.person.Person;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,6 +29,6 @@ public class AccountDeposit {
     private Person person;
     @OneToMany(mappedBy = "accountDeposit")
     @ToString.Exclude
-    private List<CardDeposit> cardDepositList;
+    private List<CardDeposit> cardDepositList=new ArrayList<>();
 
 }
