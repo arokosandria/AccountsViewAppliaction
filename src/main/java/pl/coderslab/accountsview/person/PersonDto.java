@@ -12,10 +12,7 @@ import org.hibernate.validator.constraints.pl.PESEL;
 import pl.coderslab.accountsview.address.Address;
 
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Data
@@ -24,7 +21,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class PersonDto {
   private Long id;
-    @NotBlank(message = "brak unikalnej nazwy")
+    @NotBlank(message = "parametr name jest wymagany")
     private String name;
     @Email
     private String email;
@@ -32,11 +29,11 @@ public class PersonDto {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private Date birthday;
-    @NotBlank
+    @NotBlank(message = "parametr firstName jest wymagany")
     private String firstName;
-    @NotBlank
+    @NotBlank(message = "parametr lastName jest wymagany")
     private String lastName;
-    @PESEL@NotBlank
+    @PESEL(message = "parametr PESEL jest wymagany")
     private String pesel;
     private Address address;
 }

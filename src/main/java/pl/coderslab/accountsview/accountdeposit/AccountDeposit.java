@@ -24,7 +24,6 @@ public class AccountDeposit {
     private String numberAccount;
     private double balance;
     private String nameAccount;
-
     @ManyToOne(optional = false)
     private Person person;
     @OneToMany(mappedBy = "accountDeposit")

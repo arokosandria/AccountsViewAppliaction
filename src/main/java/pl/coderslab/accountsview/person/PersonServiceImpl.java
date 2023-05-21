@@ -38,22 +38,23 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonDto create(PersonDto personDto) {
-        Person person = personRepository.save(personMapper.DtoTo(personDto));
+        Person person = personRepository.save(personMapper.dtoTo(personDto));
         return personMapper.toDto(person);
     }
 
     @Override
-    public PersonDto update(PersonDto personDto) {
-        return personRepository.findById(personDto.getId()).map(existingPerson -> {
-                    existingPerson.setFirstName((personDto.getFirstName()));
-                    existingPerson.setLastName(personDto.getLastName());
-                    if (personDto.getEmail() != null) {
-                        existingPerson.setEmail(personDto.getEmail());
+    public PersonDto update(UpdatePersonRequest request) {
+        return personRepository.findByName(request.name()).map(existingPerson -> {
+            if (request.lastName() != null) {
+                existingPerson.setLastName(request.lastName());
+            }
+                    if (request.email() != null) {
+                        existingPerson.setEmail(request.email());
                     }
                     return existingPerson;
                 }).map(personRepository::save)
                 .map(personMapper::toDto)
-                .orElseThrow(() -> new IllegalArgumentException("No person with id " + personDto.getId()));
+                .orElseThrow(() -> new IllegalArgumentException("No person with name " + request.name()));
     }
 
     @Override

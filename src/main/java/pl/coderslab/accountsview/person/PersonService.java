@@ -7,11 +7,13 @@ public interface PersonService {
 
     List<PersonDto> getAll();
 
-   PersonDto getByName(String name);
+    PersonDto getByName(String name);
+
     PersonDto getById(Long id);
+
     PersonDto create(PersonDto personDto);
 
-    PersonDto update(PersonDto personDto);
+    PersonDto update(UpdatePersonRequest request);
 
-   void delete(Long id);
+    void delete(Long id);
 }

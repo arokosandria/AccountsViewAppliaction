@@ -10,10 +10,7 @@ import java.util.List;
 public interface PersonMapper {
     PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
 
-    List<PersonDto> toDto(List<Person>personList);
-
-
-    Person DtoTo(PersonDto person);
+    Person dtoTo(PersonDto person);
     PersonDto toDto(Person person);
 
 

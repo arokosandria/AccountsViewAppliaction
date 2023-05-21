@@ -41,12 +41,11 @@ public class PersonController {
         return ResponseEntity.ok(personService.create(personDto));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<PersonDto> update(@PathVariable Long id, @Valid @RequestBody PersonDto personDto) {
+    @PutMapping("/{name}")
+    public ResponseEntity<PersonDto> update(@PathVariable String name, @Valid @RequestBody UpdatePersonRequest request) {
         try {
 
-            personDto.setId(id);
-            return ResponseEntity.ok(personService.update(personDto));
+            return ResponseEntity.ok(personService.update(request));
 
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

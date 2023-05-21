@@ -1,11 +1,8 @@
 package pl.coderslab.accountsview.address;
 
 import lombok.*;
-import pl.coderslab.accountsview.person.Person;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "address")
@@ -21,14 +18,14 @@ public class Address {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-        @NotBlank
+        @Column(nullable = false)
         private String street;
-        @NotNull
+        @Column(nullable = false)
         private int number;
         private int numberFlat;
-        @NotBlank
+        @Column(nullable = false)
         private String postCode;
-        @NotBlank
+        @Column(nullable = false)
         private String city;
 
     }
