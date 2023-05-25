@@ -38,7 +38,7 @@ public class CardDepositController {
         return cardDepositDto.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("account/{numberAccount}")
+    @GetMapping("/account/{numberAccount}")
     public List<CardDepositDto> getNumberAccount(@PathVariable String numberAccount) {
        List<CardDepositDto> cardDepositDto = cardDepositService.getByNumberAccount(numberAccount);
         return cardDepositDto;

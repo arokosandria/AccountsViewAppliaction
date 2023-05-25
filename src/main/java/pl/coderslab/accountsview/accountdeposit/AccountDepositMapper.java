@@ -8,7 +8,6 @@ import org.mapstruct.factory.Mappers;
 public interface AccountDepositMapper {
 
     AccountDepositMapper INSTANCE = Mappers.getMapper(AccountDepositMapper.class);
-
-AccountDepositDto toDto(AccountDeposit accountDeposit);
+    AccountDepositDto toDto(AccountDeposit accountDeposit);
 
 }

@@ -1,11 +1,11 @@
 ### Get cardByNumber
-GET http://localhost:8080/api/card
+GET http://localhost:8080/api/card/1
 
 ### Get Nbp
-GET http://localhost:8080/api/nbp/USD/120
+GET http://localhost:8080/api/nbp/USD/200
 
 ###Utworzenie
-GET http://localhost:8080/api/currency/22237788822/NOK
+GET http://localhost:8080/api/currency/22237788822/USD
 
 ###
 PUT http://localhost:8080/api/card/22344334
@@ -20,16 +20,12 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/api/persons/konto bankowe Karoliny Mrówkiaccountdeposits
 ###
-PUT http://localhost:8080/api/persons/1
+PUT http://localhost:8080/api/persons/acc
 Content-Type: application/json
 
 {
-  "name": "Add Factor90pattern",
-
-  "birthday": "2020-05-05",
-  "pesel":"78062761919",
-"firstName": "kkk",
-  "lastName": "Mrowka",
+  "name": "acc",
+  "lastName": "Mrowkaaa",
   "email": "karolina.mrottwka@interia.pl"
 }
 
@@ -38,11 +34,11 @@ POST http://localhost:8080/api/persons
 Content-Type: application/json
 
 {
-  "name": "konto bankowe Karoliny Mrówki",
+  "name": "acc",
   "email": "karolina.mrowka@interia.pl",
-  "birthday": "2020-05-05",
+  "birthday": "2000-05-05",
   "firstName": "Karolina",
-  "lastName": "Mrowka",
+  "lastName": "Arowka",
   "pesel":"78062761919",
   "address": {
     "street": "Czachowskiego",
@@ -66,19 +62,42 @@ Content-Type: application/json
 
 }
 ###
-POST http://localhost:8080/api/card
+PUT http://localhost:8080/api/account/22237788822
 Content-Type: application/json
 
 {
-  "personName": "konto bankowe Karoliny Mrówki",
-"numberAccount": "22237788822",
+  "numberAccount": "22237788822",
+  "balance": 333.20,
 
-  "numberCard": "22344322",
-  "name": "karta Mastercard Lojalnosciowa"
+  "nameAccount": "nameAccountupdate"
+
+}
+###
+PUT http://localhost:8080/api/card/2233343344401
+Content-Type: application/json
+
+{
+
+"numberAccount": "22237788822",
+  "numberCard": "2233343344401",
+
+  "name": "karta Mastercard Loja4sciowa"
+}
+###
+
+PUT http://localhost:8080/api/kafka/update
+Content-Type: application/json
+
+{
+  "id": 1,
+
+"street": "Krakowuuu",
+    "postCode": "232-900",
+    "city": "krakowu"
 }
 
 
 ###
-GET http://localhost:8080/api/account
+GET http://localhost:8080/api/card/account/22237788822
 ###
 DELETE http://localhost:8080/api/persons/1

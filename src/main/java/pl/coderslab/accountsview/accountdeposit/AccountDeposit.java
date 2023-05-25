@@ -21,7 +21,7 @@ public class AccountDeposit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = true, length = 26)
+    @Column(nullable = false, unique = true)
     private String numberAccount;
     private double balance;
     private String nameAccount;

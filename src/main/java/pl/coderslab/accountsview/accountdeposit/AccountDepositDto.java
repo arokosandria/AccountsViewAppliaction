@@ -11,18 +11,21 @@ import pl.coderslab.accountsview.person.Person;
 import javax.persistence.PrePersist;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Data
 @Setter
 @Getter
 @AllArgsConstructor
 public class AccountDepositDto {
-    @NotBlank
+    @NotBlank(message = "nie prawidlowy numer konta")
+    @Pattern(regexp = "^(\\d{26})$")
     private String numberAccount;
     private double balance;
-    @NotBlank
+    @NotBlank(message = "nameAccount nie moze byc puste")
     private String nameAccount;
-    @NotBlank
+    @NotBlank(message = "name nie moze byc puste")
     @JsonInclude(JsonInclude.Include.NON_NULL)
+
     private String name;
 }

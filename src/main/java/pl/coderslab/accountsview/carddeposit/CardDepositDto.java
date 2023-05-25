@@ -10,13 +10,13 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CardDepositDto {
-    @NotBlank(message = "personName is obligatory")
+    @NotBlank(message = "personName jest wymagane")
     private String personName;
-    @NotBlank(message = "numberAccount is obligatory")
+    @NotBlank(message = "numberAccount jest wymagane")
     private String numberAccount;
-    @NotBlank(message = "name is obligatory")
+    @NotBlank(message = "name jest wymagane")
     private String name;
-    @NotBlank(message = "numberCard is obligatory")
+    @NotBlank(message = "numberCard jest wymagane")
     private String numberCard;
 
 }

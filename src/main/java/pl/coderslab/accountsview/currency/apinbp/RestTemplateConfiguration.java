@@ -1,4 +1,4 @@
-package pl.coderslab.accountsview.currency;
+package pl.coderslab.accountsview.currency.apinbp;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

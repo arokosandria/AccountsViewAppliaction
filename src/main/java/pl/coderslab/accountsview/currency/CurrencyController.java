@@ -16,10 +16,10 @@ import java.util.Optional;
 
 public class CurrencyController {
     private final CurrencyService currencyService;
-    
-    @GetMapping("/{numberCard}/{currency}")
-    public CurrencyResponse getNumberCardCurrency(@PathVariable String numberCard,@PathVariable String currency) {
-        CurrencyResponse currencyResponse=currencyService.getByNumberAccount(numberCard,currency);
+
+    @GetMapping("/{numberAccount}/{currency}")
+    public CurrencyResponse getNumberCardCurrency(@PathVariable String numberAccount, @PathVariable String currency) {
+        CurrencyResponse currencyResponse = currencyService.getByNumberAccount(numberAccount, currency);
         return currencyResponse;
 
     }

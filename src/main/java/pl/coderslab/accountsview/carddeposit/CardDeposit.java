@@ -5,6 +5,7 @@ import pl.coderslab.accountsview.accountdeposit.AccountDeposit;
 import pl.coderslab.accountsview.person.Person;
 
 import javax.persistence.*;
+
 @Entity
 @Table(name = "carddeposits")
 

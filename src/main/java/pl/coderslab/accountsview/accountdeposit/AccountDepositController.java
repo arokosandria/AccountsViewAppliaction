@@ -27,6 +27,7 @@ public class AccountDepositController {
         AccountDepositDto accountDepositDto1 = accountDepositService.create(accountDepositDto);
         return ResponseEntity.ok(accountDepositDto1);
     }
+
     @PutMapping("/{accountNumber}")
     public ResponseEntity<AccountDepositDto> updateAccountDeposit(
             @PathVariable String accountNumber, @RequestBody @Valid UpdateAccountDepositRequest request) {
@@ -39,8 +40,8 @@ public class AccountDepositController {
 
     @GetMapping
     public List<AccountDepositDto> getAllAccount() {
-        List<AccountDepositDto> accountDepositDtos = accountDepositService.getAll();
-        return accountDepositDtos;
+        List<AccountDepositDto> accountDepositDtoAll = accountDepositService.getAll();
+        return accountDepositDtoAll;
     }
 
     @DeleteMapping("/{id}")

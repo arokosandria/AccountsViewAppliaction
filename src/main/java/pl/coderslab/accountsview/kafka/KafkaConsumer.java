@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import pl.coderslab.accountsview.address.Address;
+import pl.coderslab.accountsview.address.AddressDto;
 import pl.coderslab.accountsview.address.AddressRepository;
 
-import java.util.Optional;
 
 
 @Slf4j
@@ -18,28 +18,42 @@ public class KafkaConsumer {
 
     @KafkaListener(topics = "topic_address",
             groupId = "groupid")
-    public void consume(Address address) {
+    public void consume(AddressDto address) {
 
-        Address addressUpdate = addressRepository.findById(address.getId())
+        AddressDto addressUpdate = addressRepository.findById(address.id())
                 .map(addressExisting -> {
-                    if(address.getCity()!=null) {
-                        addressExisting.setCity(address.getCity());
+                    addressExisting.setCity(address.city());
+
+                    if (address.postCode() != null) {
+                        addressExisting.setPostCode(address.postCode());
                     }
-                    if(address.getPostCode()!=null) {
-                        addressExisting.setPostCode(address.getPostCode());
+                    if (address.street() != null) {
+
+                        addressExisting.setStreet(address.street());
+
                     }
-                    if(address.getStreet()!=null) {
-                        addressExisting.setStreet(address.getStreet());
+                    if (address.numberFlat() != null) {
+                        addressExisting.setNumberFlat(address.numberFlat());
                     }
-                    if (address.getNumberFlat()!=null) {
-                        addressExisting.setNumberFlat(address.getNumberFlat());
-                    }
-                    if (address.getNumber()!=null) {
-                        addressExisting.setNumber(address.getNumber());
+                    if (address.number() != null) {
+                        addressExisting.setNumber(address.number());
                     }
                     return addressExisting;
-                }).map(addressRepository::save).orElseThrow(() -> new IllegalArgumentException("No address with address id " + address.getId()));
+                }).map(addressRepository::save).map(this::toDto).orElseThrow(() -> new IllegalArgumentException("No address with address id " + address.number()));
 
         log.info(String.format("Message received -> %s", addressUpdate.toString()));
+    }
+
+    private AddressDto toDto(Address address) {
+        return new AddressDto(
+                address.getId(),
+                address.getStreet(),
+                address.getNumber(),
+                address.getNumberFlat(),
+                address.getPostCode(),
+                address.getCity()
+
+
+        );
     }
 }

@@ -23,7 +23,6 @@ public class CardDepositServiceImpl implements CardDepositService {
     private final AccountDepositRepository accountDepositRepository;
 
 
-
     @Override
     @Transactional
     public CardDepositDto create(CardDepositDto cardDepositDto) {

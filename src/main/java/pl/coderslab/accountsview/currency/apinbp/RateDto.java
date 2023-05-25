@@ -1,4 +1,4 @@
-package pl.coderslab.accountsview.currency;
+package pl.coderslab.accountsview.currency.apinbp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

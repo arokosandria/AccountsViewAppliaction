@@ -5,16 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import pl.coderslab.accountsview.carddeposit.CardDepositDto;
-import pl.coderslab.accountsview.carddeposit.CardDepositRepository;
 import pl.coderslab.accountsview.person.Person;
 import pl.coderslab.accountsview.person.PersonRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.lang.Double.valueOf;
 
 @Service
 @Slf4j
@@ -23,7 +19,6 @@ public class AccountDepositServiceImpl implements AccountDepositService {
 
     private final PersonRepository personRepository;
     private final AccountDepositRepository accountDepositRepository;
-    private final CardDepositRepository cardDepositRepository;
     private final AccountDepositMapper accountDepositMapper;
 
     @Override
@@ -39,7 +34,6 @@ public class AccountDepositServiceImpl implements AccountDepositService {
                         .numberAccount(accountDepositDto.getNumberAccount())
                         .build();
         accountDepositRepository.save(accountDeposit);
-
         return accountDepositMapper.toDto(accountDeposit);
     }
 

@@ -8,9 +8,8 @@ import pl.coderslab.accountsview.person.Person;
 import java.util.List;
 import java.util.Optional;
 
-public interface AccountDepositRepository extends JpaRepository<AccountDeposit,Long> {
-   Optional<AccountDeposit> findByNumberAccount(String numberAccount);
+public interface AccountDepositRepository extends JpaRepository<AccountDeposit, Long> {
+    Optional<AccountDeposit> findByNumberAccount(String numberAccount);
+    Optional<AccountDeposit> findByNumberAccountAndPerson(String numberAccount, Person person);
 
-    Optional<AccountDeposit> findByNumberAccountAndPerson(String numberAccount,Person person);
- List<CardDeposit> getAccountDepositByCardDepositList(String numberAccount);
 }

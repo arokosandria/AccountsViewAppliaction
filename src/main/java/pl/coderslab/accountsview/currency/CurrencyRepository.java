@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface CurrencyRepository extends JpaRepository<Currency, Long> {
 
-    Currency getMidByCurrency(String currency);
+    Currency findMidByCurrency(String currency);
 
     void deleteAll();
 }

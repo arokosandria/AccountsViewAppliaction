@@ -13,6 +13,7 @@ import pl.coderslab.accountsview.address.Address;
 
 
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -28,12 +29,12 @@ public class PersonDto {
     @NotNull @Past
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    private Date birthday;
+    private LocalDate birthday;
     @NotBlank(message = "parametr firstName jest wymagany")
     private String firstName;
     @NotBlank(message = "parametr lastName jest wymagany")
     private String lastName;
-    @PESEL(message = "parametr PESEL jest wymagany")
+    @PESEL@NotNull
     private String pesel;
     private Address address;
 }

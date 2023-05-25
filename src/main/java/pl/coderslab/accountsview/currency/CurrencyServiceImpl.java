@@ -33,13 +33,13 @@ public class CurrencyServiceImpl implements CurrencyService {
     @Override
     public CurrencyResponse getByNumberAccount(String numberAccount, String currency) {
         AccountDeposit accountDeposit = accountDepositRepository.findByNumberAccount(numberAccount).orElseThrow(() -> new IllegalArgumentException("No account Number with this numerAccount " + numberAccount));
-        Currency currency1 = currencyRepository.getMidByCurrency(currency);
+        Currency currency1 = currencyRepository.findMidByCurrency(currency);
         CurrencyResponse currencyResponse =
                 CurrencyResponse.builder()
                         .numberAccount(accountDeposit.getNumberAccount())
                         .currency(currency)
                         .amount(accountDeposit.getBalance())
-                        .amountCurrency(accountDeposit.getBalance() / currency1.getMid())
+                        .amountCurrency(accountDeposit.getBalance()/currency1.getMid())
                         .build();
         return currencyResponse;
     }
