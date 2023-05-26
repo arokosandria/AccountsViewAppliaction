@@ -36,7 +36,7 @@ public class PersonServiceTest {
         when(personMapper.toDto(person)).thenReturn(person1);
         when(personRepository.findById(1L)).thenReturn(Optional.of(person));
         PersonDto actual = personService.getById(1L);
-        assertEquals(actual.getName(), person1.getName());
+        assertEquals(person.getName(),actual.getName());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class PersonServiceTest {
         when(personMapper.toDto(person)).thenReturn(person1);
         when(personRepository.findByName("konto_numer1")).thenReturn(Optional.of(person));
         PersonDto actual = personService.getByName("konto_numer1");
-        assertEquals(actual.getName(), person1.getName());
+        assertEquals(person.getName(),actual.getName());
     }
 
     @Test
@@ -59,6 +59,6 @@ public class PersonServiceTest {
         when(personRepository.save(personMapper.dtoTo(person1))).thenReturn(person);
         when(personMapper.toDto(person)).thenReturn(person1);
         PersonDto actual = personService.create(person1);
-        assertEquals(actual.getFirstName(), person1.getFirstName());
+        assertEquals(person.getFirstName(),actual.getFirstName());
     }
 }
