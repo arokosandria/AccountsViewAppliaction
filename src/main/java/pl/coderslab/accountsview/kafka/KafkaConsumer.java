@@ -22,13 +22,13 @@ public class KafkaConsumer {
 
         AddressDto addressUpdate = addressRepository.findById(address.id())
                 .map(addressExisting -> {
-                    addressExisting.setCity(address.city());
-
+                    if (address.city() != null) {
+                        addressExisting.setCity(address.city());
+                    }
                     if (address.postCode() != null) {
                         addressExisting.setPostCode(address.postCode());
                     }
                     if (address.street() != null) {
-
                         addressExisting.setStreet(address.street());
 
                     }
@@ -39,7 +39,7 @@ public class KafkaConsumer {
                         addressExisting.setNumber(address.number());
                     }
                     return addressExisting;
-                }).map(addressRepository::save).map(this::toDto).orElseThrow(() -> new IllegalArgumentException("No address with address id " + address.number()));
+                }).map(addressRepository::save).map(this::toDto).orElseThrow(() -> new IllegalArgumentException("No address with address id " + address.id()));
 
         log.info(String.format("Message received -> %s", addressUpdate.toString()));
     }
