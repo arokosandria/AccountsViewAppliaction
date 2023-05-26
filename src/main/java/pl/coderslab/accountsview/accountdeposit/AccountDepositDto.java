@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
-@Setter
 @Getter
 @AllArgsConstructor
 public class AccountDepositDto {

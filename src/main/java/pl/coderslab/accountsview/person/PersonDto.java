@@ -10,14 +10,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.pl.PESEL;
 import pl.coderslab.accountsview.address.Address;
-
-
 import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.util.Date;
+
 
 @Data
-@Setter
 @Getter
 @AllArgsConstructor
 public class PersonDto {

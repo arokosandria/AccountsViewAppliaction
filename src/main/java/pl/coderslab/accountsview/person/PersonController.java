@@ -44,7 +44,9 @@ public class PersonController {
     @PutMapping("/{name}")
     public ResponseEntity<PersonDto> update(@PathVariable String name, @Valid @RequestBody UpdatePersonRequest request) {
         try {
-
+            if (!name.equals(request.name())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "name mismatch");
+            }
             return ResponseEntity.ok(personService.update(request));
 
         } catch (IllegalArgumentException e) {

@@ -19,7 +19,6 @@ import static org.mockito.Mockito.*;
 
 
 @SpringBootTest
-
 @TestPropertySource(properties = "task.work.rate=100")
 public class ScheduledTest {
 

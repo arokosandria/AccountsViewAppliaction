@@ -1,0 +1,11 @@
+###Modyfikacja adresu
+PUT http://localhost:8080/api/kafka/update
+Content-Type: application/json
+
+ {  "id":1,
+    "street": "Mickiewicza",
+    "number": 12,
+    "numberFlat": 22,
+    "postCode": "27-600",
+    "city": "Sandomierz"
+  }
