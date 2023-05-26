@@ -32,22 +32,22 @@ public class PersonServiceTest {
     public void givenPerson_whenFindById_thenFindPerson() {
         Address address = new Address(1L, "Czachowskiego", 12, 3, "27-900", "krakow");
         Person person = new Person(1L, "konto_numer1", "karolina.mrowka@interia.pl", LocalDate.parse("2014-03-18"), "karolina", "mrowka", "73120639665", address);
-        PersonDto person1 = new PersonDto(1L, "konto_numer1", "karolina.mrowka@interia.pl", LocalDate.parse("2014-03-18"), "karolina", "mrowka", "73120639665", address);
-        when(personMapper.toDto(person)).thenReturn(person1);
+        PersonDto personDto = new PersonDto(1L, "konto_numer1", "karolina.mrowka@interia.pl", LocalDate.parse("2014-03-18"), "karolina", "mrowka", "73120639665", address);
         when(personRepository.findById(1L)).thenReturn(Optional.of(person));
+        when(personMapper.toDto(person)).thenReturn(personDto);
         PersonDto actual = personService.getById(1L);
-        assertEquals(person.getName(),actual.getName());
+        assertEquals(personDto,actual);
     }
 
     @Test
     public void givenPerson_whenFindName_thenFindPerson() {
         Address address = new Address(1L, "Czachowskiego", 12, 3, "27-900", "krakow");
         Person person = new Person(1L, "konto_numer1", "karolina.mrowka@interia.pl", LocalDate.parse("2014-03-18"), "karolina", "mrowka", "73120639665", address);
-        PersonDto person1 = new PersonDto(1L, "konto_numer1", "karolina.mrowka@interia.pl", LocalDate.parse("2014-03-18"), "karolina", "mrowka", "73120639665", address);
-        when(personMapper.toDto(person)).thenReturn(person1);
+        PersonDto personDto = new PersonDto(1L, "konto_numer1", "karolina.mrowka@interia.pl", LocalDate.parse("2014-03-18"), "karolina", "mrowka", "73120639665", address);
         when(personRepository.findByName("konto_numer1")).thenReturn(Optional.of(person));
+        when(personMapper.toDto(person)).thenReturn(personDto);
         PersonDto actual = personService.getByName("konto_numer1");
-        assertEquals(person.getName(),actual.getName());
+        assertEquals(personDto.getName(),actual.getName());
     }
 
     @Test
@@ -55,10 +55,10 @@ public class PersonServiceTest {
 
         Address address = new Address(1L, "Czachowskiego", 12, 3, "27-900", "krakow");
         Person person = new Person(1L, "konto_numer1", "karolina.mrowka@interia.pl", LocalDate.parse("2014-03-18"), "karolina", "mrowka", "73120639665", address);
-        PersonDto person1 = new PersonDto(1L, "konto_numer1", "karolina.mrowka@interia.pl", LocalDate.parse("2014-03-18"), "karolina", "mrowka", "73120639665", address);
-        when(personRepository.save(personMapper.dtoTo(person1))).thenReturn(person);
-        when(personMapper.toDto(person)).thenReturn(person1);
-        PersonDto actual = personService.create(person1);
-        assertEquals(person.getFirstName(),actual.getFirstName());
+        PersonDto personDto = new PersonDto(1L, "konto_numer1", "karolina.mrowka@interia.pl", LocalDate.parse("2014-03-18"), "karolina", "mrowka", "73120639665", address);
+        when(personRepository.save(personMapper.dtoTo(personDto))).thenReturn(person);
+        when(personMapper.toDto(person)).thenReturn(personDto);
+        PersonDto actual = personService.create(personDto);
+        assertEquals(personDto.getFirstName(),actual.getFirstName());
     }
 }
