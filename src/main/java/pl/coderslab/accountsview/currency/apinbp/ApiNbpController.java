@@ -27,7 +27,7 @@ public class ApiNbpController {
     public RateDto getRateOfDay(@PathVariable String currency, @PathVariable int count) {
         List<RateDto> currencies = new CopyOnWriteArrayList<>();
         List<CompletableFuture<Boolean>> results = new ArrayList<>();
-        for (int i = 0; i < count - 1; i++) {
+        for (int i = 0; i < count; i++) {
             int finalI = i;
             CompletableFuture<Boolean> currencyResult = apiNbpClient.getRateOfDay(currency, count).thenApply(rateDto -> currencies.add(rateDto.rateDto().get(finalI)));
             results.add(currencyResult);
