@@ -31,7 +31,7 @@ public class PersonDto {
     private String firstName;
     @NotBlank(message = "parametr lastName jest wymagany")
     private String lastName;
-    @PESEL@NotNull
+    @PESEL@NotBlank
     private String pesel;
     private Address address;
 }
